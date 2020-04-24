@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+      .active {
+        border-radius: 20px;
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div v-bind:id="1">1</div>
+      <div v-bind:[key]="2">2</div>
+      <div :id="3">3</div>
+      <div :[key]="4">4</div>
+      <div v-text="text" v-show="false"></div>
+      <div v-if="obj.name == 'lihua'">lihua</div>
+      <div v-else-if="obj.name == 'xiaoming'">lihua</div>
+      <div v-else>zhangsan</div>
+      <input type="text" v-model="obj.name" placeholder="name" />
+      <div v-for="item in arr1">{{item}}</div>
+      <div v-for="(item,idx) in arr1">{{item+idx}}</div>
+      <div v-for="(key, value, idx) in arr2">{{key+value+idx}}</div>
+      <button v-on:click="doThis"></button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          key: "id",
+          text: "v-pre",
+          obj: {
+            name: "xiaoming",
+          },
+          arr1: ["div1", "div2", "div3"],
+          arr2: {
+            a: "a",
+            b: "b",
+          },
+        },
+        methods: {
+          doThis: function(event) {
+            console.log(this.key);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
