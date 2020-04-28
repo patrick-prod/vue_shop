@@ -5,27 +5,14 @@
       <div class="avatar_box">
         <img src="./../assets/logo.png" alt="avatar" />
       </div>
-      <el-form
-        class="login_form"
-        ref="loginFormRef"
-        :model="loginForm"
-        :rules="loginFormRules"
-      >
+      <el-form class="login_form" ref="loginFormRef" :model="loginForm" :rules="loginFormRules">
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input
-            v-model="loginForm.username"
-            placeholder="用户名"
-            prefix-icon="fa fa-user-o"
-          ></el-input>
+          <el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="fa fa-user-o"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input
-            v-model="loginForm.password"
-            placeholder="密码"
-            prefix-icon="fa fa-lock"
-          ></el-input>
+          <el-input v-model="loginForm.password" placeholder="密码" prefix-icon="fa fa-lock"></el-input>
         </el-form-item>
         <el-form-item class="login_form_btn">
           <el-button type="primary" @click="login">登录</el-button>
@@ -77,7 +64,6 @@ export default {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.loginForm)
         // 结构赋值，提取响应体。
-        console.log(res)
         if (res.meta.status !== 200) return this.$message.error('登录失败！')
         this.$message.success('登录成功！')
         window.sessionStorage.setItem('token', res.data.token)
