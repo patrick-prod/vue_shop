@@ -6,6 +6,7 @@
       active-text-color="#ffd04b"
       :unique-opened="true"
       :default-active="$route.path"
+      @select="storeModule"
       router
     >
       <el-submenu v-for="section in menulist" :key="section.id" :index="section.id + ''">
@@ -13,7 +14,12 @@
           <i :class="iconObj[section.id + '']"></i>
           <span>{{ section.authName }}</span>
         </template>
-        <el-menu-item v-for="row in section.children" :key="row.id" :index="'/' + row.path">
+        <el-menu-item
+          v-for="row in section.children"
+          :key="row.id"
+          :index="'/' + row.path"
+          :ref="'/' + row.path"
+        >
           <template slot="title">
             <span>{{ row.authName }}</span>
           </template>
@@ -47,12 +53,15 @@ export default {
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.menulist = res.data
       // console.log(res)
+    },
+    storeModule(index, indexPath) {
+      console.log(this.$refs[index].$slots)
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .el-aside {
   background-color: #333744;
   .el-menu {
